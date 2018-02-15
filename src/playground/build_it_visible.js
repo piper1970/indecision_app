@@ -1,29 +1,37 @@
 'use strict';
 
 (function(){
-    let isVisible = false;
 
-    const toggleVisibility = () => {
-        isVisible = !isVisible;
-        render();
-    };
-
-    const render = () => {
-        const appRoot = document.getElementById('app');
-        const template = (
-            <div>
+    class VisibilityToggle extends React.Component{
+        constructor(props){
+            super(props);
+            this.handleToggleVisibility = this.handleToggleVisibility.bind(this);
+            this.state = {
+                isVisible:false
+            };
+        }
+        handleToggleVisibility(){
+            this.setState((prev) => {
+                return {
+                    isVisible: !prev.isVisible
+                };
+            });
+        }
+        render(){
+            return (
+                <div>
                 <h1>Visibility Toggle</h1>
-                <button onClick={toggleVisibility}>{(
-                    isVisible? 'Hide Details':'Show Details'
+                <button onClick={this.handleToggleVisibility}>{(
+                    this.state.isVisible? 'Hide Details':'Show Details'
                 )}</button>
-                {isVisible && (
-                    <p>This is the message</p>
+                {this.state.isVisible && (
+                    <p>Eat at Al's!!</p>
                 )}
             </div>
-        );
-        ReactDOM.render(template, appRoot);
-    };
+            );
+        }
+    }
 
-    render();
+    ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
 
 }());

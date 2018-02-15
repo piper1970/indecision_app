@@ -1,5 +1,17 @@
 'use strict';
 
+
+const obj = {
+    name: 'Jgrewr',
+    getName(){
+        return this.name;
+    }
+};
+
+const getName = obj.getName.bind(obj);
+console.log(getName());
+
+
 class Person {
     constructor(name = 'Anonymous', age = 0){
         this.name = name;
